@@ -1,0 +1,42 @@
+Info = [
+    {
+        avatar:'./imgs/def_avatar.jpg',
+        nickname:'胡书铭1',
+        campanyname:'水韵墨客纹身',
+        hot:5000,
+        v:true
+    },
+    {
+        avatar:'./imgs/def_avatar.jpg',
+        nickname:'胡书铭2胡书铭2胡书铭2胡书铭2胡书铭2',
+        campanyname:'水韵墨客纹身',
+        hot:5000,
+        v:false
+    },
+    {
+        avatar:'./imgs/def_avatar.jpg',
+        nickname:'胡书铭3',
+        campanyname:'水韵墨客纹身水韵墨客纹身水韵墨客纹身水韵墨客纹身水韵墨客纹身',
+        hot:5000,
+        v:true
+    },
+    {
+        avatar:'./imgs/def_avatar.jpg',
+        nickname:'胡书铭4',
+        campanyname:'水韵墨客纹身',
+        hot:5000
+    },
+    {
+        avatar:'./imgs/def_avatar.jpg',
+        nickname:'胡书铭5',
+        campanyname:'水韵墨客纹身',
+        hot:5000
+    },
+    {
+        avatar:'./imgs/def_avatar.jpg',
+        nickname:'胡书铭6',
+        campanyname:'水韵墨客纹身',
+        hot:5000
+    }
+
+];

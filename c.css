@@ -1,0 +1,135 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+ul {
+    list-style: none;
+}
+
+input, select, textarea {
+    -webkit-appearance: none;
+    outline: none;
+    border: 0;
+    font-size: 3.2%;
+    font-family: "·½ÕýÀ¼Í¤ºÚ", "Î¢ÈíÑÅºÚ", sans-serif;
+}
+
+input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
+    font-size: 16px;
+    color: #bfbfbf;
+    font-family: "·½ÕýÀ¼Í¤ºÚ", "Î¢ÈíÑÅºÚ", sans-serif;
+}
+
+a, a:link, a:visited, a:active, b, i, h1, h2, h3, h4, h5, h6 {
+    text-decoration: none;
+    text-shadow: none;
+    font-weight: normal;
+    font-style: normal;
+}
+
+html {
+    font-family: "·½ÕýÀ¼Í¤ºÚ", "Î¢ÈíÑÅºÚ", sans-serif;
+    -webkit-appearance: none;
+}
+
+body {
+    min-width: 320px;
+    background-color: #e6e6e6;
+}
+
+.row {
+    padding-top: 15px;
+    width: 100%;
+    text-align: center;
+}
+
+.line {
+    width: 50%;
+    position: absolute;
+    height: 80px;
+    border-right: solid 1px #a26b61;
+    z-index: -99;
+    margin-top: -16px;
+}
+
+.avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 999px;
+    background-color: #e6e6e6;
+    border: solid 2px #a26b61;
+    overflow: hidden;
+    margin: 0 auto;
+}
+
+.avatar img {
+    width: 60px;
+}
+
+.left {
+    margin-top: 10px;
+    position: absolute;
+    float: left;
+    left: 10px;
+    text-align: right;
+    width: calc(50% - 50px);
+
+    font-size: 16px;
+    color: #6ba0bb;
+}
+
+.left > div > p {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin-right: 20px;
+}
+
+.left > div:first-child > img {
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    vertical-align: top;
+    margin: 2px 0 0 -15px;
+}
+
+.left > div:last-child > img {
+    width: 24px;
+    height: 24px;
+    margin: 5px 0 0 5px;
+}
+
+.right {
+    margin-top: 10px;
+    position: absolute;
+    float: right;
+    right: 10px;
+    text-align: left;
+    width: calc(50% - 50px);
+
+    color: #888888;
+    font-size: 14px;
+}
+
+.right > p {
+    margin-bottom: 5px;
+}
+
+.right span {
+    color: #e38f71;
+}
+
+.loading{
+    font-size: 12px;
+    text-align: center;
+    width: 100%;
+    padding: 40px 0;
+    color: #888888;
+    opacity:0;
+    transition: opacity 0.3s;
+    -o-transition: opacity 0.3s;
+    transition: opacity 0.3s;
+    transition: opacity 0.3s;
+}

@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title></title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        input, select, textarea {
+            -webkit-appearance: none;
+            outline: none;
+            border: 0;
+            font-size: 3.2%;
+            font-family: "方正兰亭黑", "微软雅黑", sans-serif;
+        }
+
+        input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
+            font-size: 16px;
+            color: #bfbfbf;
+            font-family: "方正兰亭黑", "微软雅黑", sans-serif;
+        }
+
+        a, a:link, a:visited, a:active, b, i, h1, h2, h3, h4, h5, h6 {
+            text-decoration: none;
+            text-shadow: none;
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        html {
+            font-family: "方正兰亭黑", "微软雅黑", sans-serif;
+            -webkit-appearance: none;
+        }
+
+        body {
+            min-width: 320px;
+            background-color: #e6e6e6;
+        }
+
+        .row {
+            width: 100%;
+            background-color: white;
+            padding: 10px 0;
+            border-bottom: solid 1px #eeeeee;
+        }
+
+        .avatar {
+            position: absolute;
+            margin: 0 10px;
+            width: 70px;
+            height: 70px;
+            border-radius: 999px;
+            background-color: #e6e6e6;
+            border: solid 2px #bfbfbf;
+            overflow: hidden;
+        }
+
+        .avatar img {
+            width: 70px;
+        }
+
+        .info {
+            margin: 0 10px 0 100px;
+            min-height: 70px;
+        }
+
+        .title{
+            margin-top: 5px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        h1 {
+            color: #6ba0bb;
+            font-size: 14px;
+            font-weight: normal;
+            display: inline-block;
+        }
+
+        img.vip{
+            width: 16px;
+            vertical-align: middle;
+            margin: -2px 0 0 3px;
+        }
+
+        h2 {
+            color: #888888;
+            font-size: 12px;
+            font-weight: normal;
+            display: inline-block;
+            border-left: solid 1px #888888;
+            padding-left: 5px;
+            margin-left: 5px;
+        }
+
+        .hot {
+            position: absolute;
+            right: 10px;
+            margin: 20px 10px 0 0;
+            font-size: 14px;
+            color: #888888;
+        }
+
+        .hot > span {
+            color: #e38f71;
+        }
+
+        .other {
+            color: #888888;
+            font-size: 12px;
+            margin-top: 10px;
+        }
+
+        .loading {
+            font-size: 10px;
+            text-align: center;
+            width: 100%;
+            padding: 40px 0;
+            color: #888888;
+            opacity: 0;
+            transition: opacity 0.3s;
+            -o-transition: opacity 0.3s;
+            -moz-transition: opacity 0.3s;
+            -webkit-transition: opacity 0.3s;
+        }
+
+    </style>
+    <script src="jquery-1.9.1.min.js"></script>
+    <script src="jquery.jsonp-2.4.0.min.js"></script>
+</head>
+<body>
+<div id="main">
+
+</div>
+<div class="loading">加载中...</div>
+</body>
+<script>
+    var List = [],
+            isLoading = false,
+            _id = location.search.substr(1).match(/_id=([^\b&]*)/)[1];
+    (function () {
+
+        var getList = function () {
+            isLoading = true;
+            $.jsonp({
+                url: "http://123.57.42.13/V1.0.0/Exhibition/storeList?_method=GET",//?_id=55dfdc64479fd6ed0a2ff1a1
+                callbackParameter: "callback",
+                data: {
+                    _id:_id,
+                    limit: 10,
+                    index: List.length
+                },
+                success: function (obj) {
+                    obj = $.parseJSON(obj);
+                    if (obj.code == 0) {
+                        var list = obj.data.list,
+                                str = '',
+                                user = {};
+                        List.push(list);
+
+                        if (obj.data.list) {
+                            for (var i = 0; i < list.length; i++) {
+                                user = list[i];
+                                console.dir(user);
+                                str = '<div class="row user' + user.id + '">';
+                                if (user.avatar) {
+                                    str += '<div class="avatar"><img src="' + user.userInfo.avatar + '"/></div>';
+                                }
+                                else {
+                                    str += '<div class="avatar"><img src="imgs/def_avatar.jpg"/></div>';
+                                }
+                                str += '<div class="info">'
+                                        + '<div class="hot"><span>' + user.hot + '</span>&nbsp;人气</div>'
+                                +'<div class="title">'
+                                + '<h1>' + user.userInfo.nickname + '</h1>';
+
+                                if (user.v) {
+                                    str += '<img class="vip" src="imgs/vip.png">';
+                                }
+                                if (user.company) {
+                                    str += '<h2>' + user.company.name + '</h2>';
+                                }
+
+                                str += '</div><div class="other">';
+                                str += '<p>作品:' + user.productNum + '</p>';
+//                                if (1)str += '<p>偏好风格:' + '鬼脸' + '</p>';
+
+                                str += '</div></div></div>';
+                                $('#main').append(str);
+                            }
+                        }
+                        $('.loading').css('opacity', 0);
+//                        isLoading = false;
+                    }
+                    else {
+                        alert(obj.msg);
+                        $('.loading').css('opacity', 0);
+//                        isLoading = false;
+                    }
+                },
+                error:function(){
+//                    alert()
+                }
+            });
+        };
+
+        setInterval(function () {
+            if (isLoading)return;
+            var sh = $(window).scrollTop(),
+                    wh = $(window).height(),
+                    dh = $(document).height();
+            if (sh + wh > dh - 100) {
+                $('.loading').css('opacity', 1);
+                getList();
+            }
+
+        }, 50)
+    }())
+</script>
+</html>
