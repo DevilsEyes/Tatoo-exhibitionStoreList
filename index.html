@@ -73,7 +73,7 @@
             min-height: 70px;
         }
 
-        .title{
+        .title {
             margin-top: 5px;
             white-space: nowrap;
             overflow: hidden;
@@ -87,7 +87,7 @@
             display: inline-block;
         }
 
-        img.vip{
+        img.vip {
             width: 16px;
             vertical-align: middle;
             margin: -2px 0 0 3px;
@@ -157,8 +157,8 @@
 //                url: "http://123.57.42.13/V1.0.0/Exhibition/storeList?_method=GET",
                 callbackParameter: "callback",
                 data: {
-                    _id:_id,
-                    limit: 10,
+                    _id: _id,
+                    limit: 30,
                     index: List.length
                 },
                 success: function (obj) {
@@ -175,15 +175,15 @@
                                 console.dir(user);
                                 str = '<div class="row user' + user.id + '">';
                                 if (user.userInfo.avatar) {
-                                    str += '<div class="avatar"><img src="' + user.userInfo.avatar + '"/></div>';
+                                    str += '<div class="avatar"><img src="' + user.userInfo.avatar + '?imageView2/1/w/70"/></div>';
                                 }
                                 else {
                                     str += '<div class="avatar"><img src="imgs/def_avatar.jpg"/></div>';
                                 }
                                 str += '<div class="info">'
                                         + '<div class="hot"><span>' + user.hot + '</span>&nbsp;人气</div>'
-                                +'<div class="title">'
-                                + '<h1>' + user.userInfo.nickname + '</h1>';
+                                        + '<div class="title">'
+                                        + '<h1>' + user.userInfo.nickname + '</h1>';
 
                                 if (user.v) {
                                     str += '<img class="vip" src="imgs/vip.png">';
@@ -201,16 +201,14 @@
                             }
                         }
                         $('.loading').css('opacity', 0);
-//                        isLoading = false;
                     }
                     else {
                         alert(obj.msg);
                         $('.loading').css('opacity', 0);
-//                        isLoading = false;
                     }
                 },
-                error:function(){
-//                    alert()
+                complete: function () {
+                    isLoading = false;
                 }
             });
         };
