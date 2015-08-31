@@ -153,7 +153,7 @@
         var getList = function () {
             isLoading = true;
             $.jsonp({
-                url: "http://api.meizhanggui.cc/V1.0.0/Exhibition/storeList?_method=GET",
+                url: "http://api.meizhanggui.cc/V2.0.0/Exhibition/storeList?_method=GET",
 //                url: "http://123.57.42.13/V1.0.0/Exhibition/storeList?_method=GET",
                 callbackParameter: "callback",
                 data: {
@@ -168,6 +168,9 @@
                                 str = '',
                                 user = {};
                         List.push(list);
+
+                        if(obj.data.count)window.g$count = obj.data.count;
+                        if(List.length == g$count)clearInterval(timer);
 
                         if (obj.data.list) {
                             for (var i = 0; i < list.length; i++) {
@@ -213,7 +216,7 @@
             });
         };
 
-        setInterval(function () {
+        window.timer = setInterval(function () {
             if (isLoading)return;
             var sh = $(window).scrollTop(),
                     wh = $(window).height(),
