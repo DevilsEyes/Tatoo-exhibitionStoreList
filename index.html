@@ -153,8 +153,9 @@
         var getList = function () {
             isLoading = true;
             $.jsonp({
-                url: "http://api.meizhanggui.cc/V2.0.0/Exhibition/storeList?_method=GET",
-//                url: "http://123.57.42.13/V1.0.0/Exhibition/storeList?_method=GET",
+                url: "http://api.meizhanggui.cc/V1.0.0/Exhibition/storeList?_method=GET",
+//                url: "http://123.57.42.13/V2.0.0/Exhibition/storeList?_method=GET",
+//                url: "http://api.meizhanggui.cc/V2.0.0/Exhibition/storeList?_method=GET",
                 callbackParameter: "callback",
                 data: {
                     _id: _id,
@@ -167,15 +168,14 @@
                         var list = obj.data.list,
                                 str = '',
                                 user = {};
-                        List.push(list);
+                        List = List.concat(list);
 
-                        if(obj.data.count)window.g$count = obj.data.count;
-                        if(List.length == g$count)clearInterval(timer);
+                        if (obj.data.count)window.g$count = obj.data.count;
+                        if (List.length >= g$count)clearInterval(timer);
 
                         if (obj.data.list) {
                             for (var i = 0; i < list.length; i++) {
                                 user = list[i];
-                                console.dir(user);
                                 str = '<div class="row user' + user.id + '">';
                                 if (user.userInfo.avatar) {
                                     str += '<div class="avatar"><img src="' + user.userInfo.avatar + '?imageView2/1/w/70"/></div>';
@@ -204,14 +204,13 @@
                             }
                         }
                         $('.loading').css('opacity', 0);
+                        isLoading = false;
                     }
                     else {
                         alert(obj.msg);
                         $('.loading').css('opacity', 0);
+                        isLoading = false;
                     }
-                },
-                complete: function () {
-                    isLoading = false;
                 }
             });
         };
