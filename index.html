@@ -47,6 +47,7 @@
         }
 
         .row {
+            display: block;
             width: 100%;
             background-color: white;
             padding: 10px 0;
@@ -176,7 +177,7 @@
                         if (obj.data.list) {
                             for (var i = 0; i < list.length; i++) {
                                 user = list[i];
-                                str = '<div class="row user' + user.id + '">';
+                                str = '<a class="row user' + user.storeId + '" href="http://m.meizhanggui.cc/wsdk/?storeId=' + user.storeId + '" ">';
                                 if (user.userInfo.avatar) {
                                     str += '<div class="avatar"><img src="' + user.userInfo.avatar + '?imageView2/1/w/70"/></div>';
                                 }
@@ -191,15 +192,15 @@
                                 if (user.v) {
                                     str += '<img class="vip" src="imgs/vip.png">';
                                 }
-                                if (user.company) {
-                                    str += '<h2>' + user.company.name + '</h2>';
+                                if (user.userInfo.company) {
+                                    str += '<h2>' + user.userInfo.company.name + '</h2>';
                                 }
 
                                 str += '</div><div class="other">';
                                 str += '<p>作品:' + user.productNum + '</p>';
 //                                if (1)str += '<p>偏好风格:' + '鬼脸' + '</p>';
 
-                                str += '</div></div></div>';
+                                str += '</div></div></a>';
                                 $('#main').append(str);
                             }
                         }
